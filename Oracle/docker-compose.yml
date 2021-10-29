@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+
+  oracle-server:
+    image: store/oracle/database-enterprise:12.2.0.1
+    volumes:
+    - docker-volume:/opt/oracle/oradata
+    ports:
+    - "32711:1521"
+    networks:
+    - docker-network2
+
+networks:
+  docker-network2:
+    driver: bridge
+
+volumes:
+  docker-volume:
+    driver: local
