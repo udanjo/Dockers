@@ -3,11 +3,11 @@ version: '3.4'
 services:
   rabbitmq:
     container_name: rabbitmq
-    image: rabbitmq:3.7-management
+    image: rabbitmq:3.11-management
     ports:
       - '15672:15672'
       - '5672:5672'
     environment:
       RABBITMQ_DEFAULT_USER: "admin"
       RABBITMQ_DEFAULT_PASS: "admin"
-      RABBITMQ_DEFAULT_VHOST: "test"
+      RABBITMQ_DEFAULT_VHOST: "rich"
