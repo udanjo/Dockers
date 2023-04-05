@@ -1,0 +1,13 @@
+Explicando um pouco o Dockerfile acima:
+
+FROM jboss/keycloak:15.0.2 é a imagem base que estamos usando, que é a imagem oficial do Keycloak na versão 15.0.2.
+
+ENV KEYCLOAK_USER admin e ENV KEYCLOAK_PASSWORD admin são variáveis de ambiente para configurar o usuário e senha de administração do Keycloak.
+
+COPY custom-realm.json /opt/jboss/keycloak/ copia o arquivo de configuração do realm personalizado para dentro do container, no diretório /opt/jboss/keycloak/.
+
+CMD ["-b", "0.0.0.0", "-Djboss.http.port=8080", "-Dkeycloak.import=/opt/jboss/keycloak/custom-realm.json"] é o comando que será executado quando o container for iniciado. Neste caso, estamos definindo algumas configurações do Keycloak, como a porta em que ele vai escutar e o arquivo de configuração do realm personalizado.
+
+EXPOSE 8080 indica que a porta 8080 deve ser exposta para que possamos acessar o Keycloak de fora do container.
+
+Você pode salvar esse arquivo como Dockerfile e, na mesma pasta, colocar o arquivo custom-realm.json com a sua configuração de realm personalizado. Depois, basta executar o comando docker build -t meu-keycloak . para construir a imagem Docker, e depois executar o comando docker run -p 8080:8080 meu-keycloak para rodar o container.
